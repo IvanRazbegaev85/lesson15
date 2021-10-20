@@ -1,30 +1,33 @@
-const DomElement = function (selector, height, width, bg, fontSize) {
+const DomElement = function (selector, height, width, bg) {
     this.selector = selector;
     this.height = height;
     this.width = width;
     this.bg = bg;
-    this.fontSize = fontSize;
+    this.squarePosition = '';
 
     let element;
 
     this.createElement = function () {
         if(this.selector.startsWith(".")){
             element = document.createElement('div');
-            element.classList = this.selector;
+            element.classList = this.selector.split("").map((value, index) => {
+                return index === 0 ? '' : value;
+            }).join("");
             element.style.height = `${this.height}px`;
             element.style.width = `${this.width}px`;
             element.style.backgroundColor = this.bg;
-            element.style.fontSize = `${this.fontSize}px`;
-            element.textContent = "Lorem ipsum dolor sit amet";
+            element.style.position = this.squarePosition;
             document.body.append(element);
         } else if(this.selector.startsWith("#")) {
             element = document.createElement('p');
-            element.id = this.selector;
+            console.log();
+            element.id = this.selector.split("").map((value, index) => {
+                return index === 0 ? '' : value;
+            }).join("");
             element.style.height = `${this.height}px`;
             element.style.width = `${this.width}px`;
             element.style.backgroundColor = this.bg;
-            element.style.fontSize = `${this.fontSize}px`;
-            element.textContent = "Lorem ipsum dolor sit amet";
+            element.style.position = this.squarePosition;
             document.body.append(element);
         }
     };

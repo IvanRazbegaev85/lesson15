@@ -19,7 +19,7 @@ const DomElement = function (selector, height, width, bg, fontSize) {
             document.body.append(element);
         } else if(this.selector.startsWith("#")) {
             element = document.createElement('p');
-            element.id = selector;
+            element.id = this.selector;
             element.style.height = `${this.height}px`;
             element.style.width = `${this.width}px`;
             element.style.backgroundColor = this.bg;
@@ -30,5 +30,5 @@ const DomElement = function (selector, height, width, bg, fontSize) {
     };
 }
 
-const domElement = new DomElement("#block", 25, 25, "green", 12);
+const domElement = new DomElement("#block", 100, 100, "green", 25);
 domElement.createElement();

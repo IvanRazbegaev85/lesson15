@@ -4,6 +4,8 @@ const DomElement = function (selector, height, width, bg) {
     this.width = width;
     this.bg = bg;
     this.squarePosition = '';
+    this.top = 0;
+    this.left = 0;
 
     let element;
 
@@ -17,6 +19,8 @@ const DomElement = function (selector, height, width, bg) {
             element.style.width = `${this.width}px`;
             element.style.backgroundColor = this.bg;
             element.style.position = this.squarePosition;
+            element.style.top = `${this.top}`;
+            element.style.left = `${this.left}`;
             document.body.append(element);
         } else if(this.selector.startsWith("#")) {
             element = document.createElement('p');
@@ -28,6 +32,8 @@ const DomElement = function (selector, height, width, bg) {
             element.style.width = `${this.width}px`;
             element.style.backgroundColor = this.bg;
             element.style.position = this.squarePosition;
+            element.style.top = `${this.top}`;
+            element.style.left = `${this.left}`;
             document.body.append(element);
         }
     };
@@ -41,13 +47,32 @@ domElement.setPosition = function (position) {
 };
 
 domElement.setPosition('absolute').createElement();
-const square = document.querySelector('p');
+let square = document.querySelector('p');
 
 document.addEventListener("keydown", function (event) {
-    if(event.keyCode === 38   ){
+    if(event.keyCode === 38){
+        square = document.querySelector('p');
         console.log("arrowUp is pressed!")
         square.remove();
-        domElement.height -= 10;
+        domElement.top -= 10;
+        domElement.createElement();
+    } else if(event.keyCode === 37){
+        square = document.querySelector('p');
+        console.log("arrowLeft is pressed!")
+        square.remove();
+        domElement.left -= 10;
+        domElement.createElement();
+    } else if(event.keyCode === 39){
+        square = document.querySelector('p');
+        console.log("arrowRight is pressed!")
+        square.remove();
+        domElement.left += 10;
+        domElement.createElement();
+    } else if(event.keyCode === 40){
+        square = document.querySelector('p');
+        console.log("arrowDowh is pressed!")
+        square.remove();
+        domElement.top += 10;
         domElement.createElement();
     }
 })

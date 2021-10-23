@@ -13,21 +13,16 @@ const DomElement = function (selector, height, width, bg) {
             element.classList = this.selector.split("").map((value, index) => {
                 return index === 0 ? '' : value;
             }).join("");
-            element.style.height = `${this.height}px`;
-            element.style.width = `${this.width}px`;
-            element.style.backgroundColor = this.bg;
-            element.style.position = this.squarePosition;
+            element.style.cssText = `height: ${this.height}; width: ${this.width}; background-color: ${this.bg}; position: ${this.squarePosition}`;
+            element.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
             document.body.append(element);
         } else if(this.selector.startsWith("#")) {
             element = document.createElement('p');
-            console.log();
             element.id = this.selector.split("").map((value, index) => {
                 return index === 0 ? '' : value;
             }).join("");
-            element.style.height = `${this.height}px`;
-            element.style.width = `${this.width}px`;
-            element.style.backgroundColor = this.bg;
-            element.style.position = this.squarePosition;
+            element.style.cssText = `height: ${this.height}px; width: ${this.width}px; background-color: ${this.bg}; position: ${this.squarePosition}`;
+            element.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
             document.body.append(element);
         }
     };

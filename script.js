@@ -1,5 +1,6 @@
-const DomElement = function (selector, height, width, bg) {
-    this.selector = selector;
+let square = document.querySelector('p');
+
+const DomElement = function (height, width, bg) {
     this.height = height;
     this.width = width;
     this.bg = bg;
@@ -10,72 +11,44 @@ const DomElement = function (selector, height, width, bg) {
     let element;
 
     this.createElement = function () {
-        if(this.selector.startsWith(".")){
-            element = document.createElement('div');
-            element.classList = this.selector.split("").map((value, index) => {
-                return index === 0 ? '' : value;
-            }).join("");
-            element.style.height = `${this.height}px`;
-            element.style.width = `${this.width}px`;
-            element.style.backgroundColor = this.bg;
-            element.style.position = this.squarePosition;
-            element.style.top = `${this.top}`;
-            element.style.left = `${this.left}`;
-            document.body.append(element);
-        } else if(this.selector.startsWith("#")) {
-            element = document.createElement('p');
-            console.log();
-            element.id = this.selector.split("").map((value, index) => {
-                return index === 0 ? '' : value;
-            }).join("");
-            element.style.height = `${this.height}px`;
-            element.style.width = `${this.width}px`;
-            element.style.backgroundColor = this.bg;
-            element.style.position = this.squarePosition;
-            element.style.top = `${this.top}`;
-            element.style.left = `${this.left}`;
-            document.body.append(element);
-        }
+        element = document.createElement('p');
+        element.style.cssText = `height: ${this.height}px; width: ${this.width}px;
+         background-color: ${this.bg}; position: ${this.squarePosition}; top:${this.top}px; left:${this.left}px;`;
+        document.body.append(element);
+    };
+
+    this.changePositionRight = function () {
+        square = document.querySelector('p');
+        square.style.left = `${(parseInt(square.style.left || 0) + 10)}px`
+    };
+    this.changePositionLeft = function () {
+        square = document.querySelector('p');
+        square.style.left = `${(parseInt(square.style.left || 0) - 10)}px`
+
+    };
+    this.changePositionUp = function () {
+        square = document.querySelector('p');
+        square.style.top = `${(parseInt(square.style.top || 0) - 10)}px` ;
+
+    };
+    this.changePositionDown = function () {
+        square = document.querySelector('p');
+        square.style.top = `${(parseInt(square.style.top || 0) + 10)}px`
     };
 }
 
-const domElement = new DomElement("#block", 100, 100, "black");
-
-domElement.setPosition = function (position) {
-    domElement.squarePosition = position;
-    return this;
-};
-
-domElement.setPosition('absolute').createElement();
-let square = document.querySelector('p');
+const domElement = new DomElement(100, 100, "black");
+domElement.squarePosition = 'absolute';
+domElement.createElement();
 
 document.addEventListener("keydown", function (event) {
     if(event.keyCode === 38){
-        square = document.querySelector('p');
-        console.log("arrowUp is pressed!")
-        square.remove();
-        domElement.top -= 10;
-        domElement.createElement();
-    } else if(event.keyCode === 37){
-        square = document.querySelector('p');
-        console.log("arrowLeft is pressed!")
-        square.remove();
-        domElement.left -= 10;
-        domElement.createElement();
+        domElement.changePositionUp()
     } else if(event.keyCode === 39){
-        square = document.querySelector('p');
-        console.log("arrowRight is pressed!")
-        square.remove();
-        domElement.left += 10;
-        domElement.createElement();
+        domElement.changePositionRight();
+    } else if(event.keyCode === 37){
+        domElement.changePositionLeft();
     } else if(event.keyCode === 40){
-        square = document.querySelector('p');
-        console.log("arrowDowh is pressed!")
-        square.remove();
-        domElement.top += 10;
-        domElement.createElement();
+        domElement.changePositionDown();
     }
 })
-
-
-console.log(square)
